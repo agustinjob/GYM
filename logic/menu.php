@@ -59,15 +59,15 @@ $sesionIniciada=$utils->revisarSession(2);
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-user"></i>
-                    <span>Empleados</span>
+                    <span>Usuarios</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Operaciones usuarios</h6>
-                       <a class="collapse-item" href="empleados/registrar.php">Registro</a>
-                        <a class="collapse-item" href="empleados/consultar.php">Consulta</a>
-                        <a class="collapse-item" href="empleados/consultar.php">Ver falta de pago</a>
-                        <a class="collapse-item" href="empleados/consultar.php">Ver acceso al GYM</a>
+                       <a class="collapse-item"  href="usuarios/registrar.php">Registro</a>
+                        <a class="collapse-item" href="usuarios/consultar.php">Consulta</a>
+                        <a class="collapse-item" href="usuarios/faltadepago.php">Ver falta de pago</a>
+                        <a class="collapse-item" href="usuarios/accesogym.php">Ver acceso al GYM</a>
                     </div>
                 </div>
             </li>
@@ -76,28 +76,28 @@ $sesionIniciada=$utils->revisarSession(2);
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-address-book"></i>
-                    <span>Inventario</span>
+                    <span>Entradas/Salidas</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Entradas y salidas:</h6>
                         <!--<a class="collapse-item" href="inventario/registro.php">Alta</a>-->
-                        <a class="collapse-item" href="inventario/consultar.php">Registrar entrada/salida</a>
-                        <a class="collapse-item" href="inventario/bajos.php">Consultar entrada/salida</a>
+                        <a class="collapse-item" href="entrada-salida/registrar.php">Registrar entrada/salida</a>
+                        <a class="collapse-item" href="entrada.salida/consultar.php">Consultar entrada/salida</a>
                     </div>
                 </div>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities2" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-address-book"></i>
                     <span>Ver flujo de efectivo</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                <div id="collapseUtilities2" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Flujo efectivo</h6>
                         <!--<a class="collapse-item" href="inventario/registro.php">Alta</a>-->
-                        <a class="collapse-item" href="inventario/consultar.php">Realizar corte</a>
+                        <a class="collapse-item" href="corte/consultar.php">Realizar corte</a>
                     </div>
                 </div>
             </li>
