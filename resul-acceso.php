@@ -1,3 +1,8 @@
+<?php
+require "logic/dao/usuario.php";
+$codigo = $_GET["codigo"];
+$objUsu = new Usuario();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,48 +13,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    
+
 
     <title>SR</title>
-   <!-- Bootstrap core JavaScript-->
+    <!-- Bootstrap core JavaScript-->
     <script src="js/jquery-3.6.0.min.js"></script>
     <script>
-        function revisaDatos() {
-
-
-            var parametros = {
-                "email": email,
-                "pass": pass
-            };
-
-            $.ajax({
-                data: $("#formulario").serialize(),
-                url: 'logic/logica.php',
-                type: 'post',
-                beforeSend: function() {
-            
-                },
-                success: function(response) {
-     
-                    if (response.trim() === "0") {
-                        alert("Datos no encontrados");
-                    } else {
-                        if (response.trim() === "1") {
-                            location.href = "logic/menu.php";
-                        } else {
-                            location.href = "logic/menuEmpleado.php";
-                        }
-                    }
-                }
-            });
-
+        function redirecciona() {
+            location.href = "home-acceso.php";
         }
-
-        function redirecciona(){
-            location.href="acceso.html";
-        }
-        setTimeout(redirecciona,3000);
-
+        setTimeout(redirecciona, 3000);
     </script>
 
     <!-- Custom fonts for this template-->
@@ -70,24 +43,33 @@
 
             <div class="col-xl-10 col-lg-12 col-md-9">
 
-                <div class="card o-hidden border-0 shadow-lg my-5"  style="background-color: greenyellow;">
+                <div class="card o-hidden border-0 shadow-lg my-5" style="background-color: greenyellow;">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                        
+
                             <div class="col-lg-12">
                                 <div class="p-5">
                                     <div class="text-center">
-
-                                        <h1 class="h4 text-white-900 mb-4">Bienvenid@ Bibiana</h1>
+                                        <?php
+                                        $usuario = $objUsu->buscarByCodigo($codigo);
+                                        $info = mysqli_fetch_assoc($usuario);
+                                        ?>
+                                        <h1 class="h4 text-white-900 mb-4">Bienvenid@ <?php echo $info["nombre"]; ?></h1>
                                         <br>
-                                        <h1 class="h4 text-white-900 mb-4">Vas al corriente con tus pagos puedes acceder</h1>
-                                     <!--  <img src="img/logoGym.jpg"/><br/>-->
-                                       </div>
-                                 
+                                        <?php $partida1 = explode("-", $info["fecha_nacimiento"]);
+                                        $date_nueva = date('Y-m-d');
+                                        $partida2 = explode("-", $date_nueva);
+                                        if ($partida1[1] == $partida2[1] && $partida1[2] == $partida2[2]) {
+                                            echo ' <h1 class="h4 text-white-900 mb-4">QUE TENGAS UN MUY FELIZ CUMPLEAÑOS</h1>  ';
+                                        }  ?>
+                                        <h1 class="h4 text-white-900 mb-4">PUEDES INGRESAR AL GYM</h1>
+                                        <!--  <img src="img/logoGym.jpg"/><br/>-->
+                                    </div>
+
 
                                     <div class="text-center">
-                                        <a class="small" href="#">Sistema GYM BIBIANA</a>
+                                        <a class="small" href="#">Athletic Gym</a>
                                     </div>
 
                                 </div>
@@ -101,7 +83,7 @@
 
     </div>
 
- 
+
     <!-- <script src="vendor/jquery/jquery.min.js"></script>-->
     <script src="js/bootstrap.bundle.js"></script>
 

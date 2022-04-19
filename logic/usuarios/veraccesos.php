@@ -1,10 +1,13 @@
 <?php
 require "../utils/utilidades.php";
-require "../dao/producto.php";
+require "../dao/acceso.php";
 
-$utils= new Utilidades();
-$sesionIniciada=$utils->revisarSession(1);
+$objAcc= new Acceso();
+$utils = new Utilidades();
+$sesionIniciada = $utils->revisarSession(1);
+$tipo_usuario=$_SESSION["tipo"];
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +19,7 @@ $sesionIniciada=$utils->revisarSession(1);
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sistema Santa Rosa</title>
+    <title>Athletic Gym</title>
 
     <!-- Custom fonts for this template-->
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -25,73 +28,8 @@ $sesionIniciada=$utils->revisarSession(1);
     <!-- Custom styles for this template-->
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
     <link href="../../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    
-    <script>
 
-    function buscarPorFecha(){
-     
-       tipo= $("#tipoFecha").val();
 
-       if(tipo === "0"){
-           alert("Por favor selecciona una de la opciones para mostrar las ventas");
-           return false;
-       }
-
-       parametros={
-           "tipo":tipo,
-           "opcion":"ventas_periodo_fecha"
-       };
-
-       $.ajax({
-           data: parametros,
-           url: "../logicaNegocio.php",
-           type:"post",
-           beforeSend:function(){
-
-           },
-           success:function(response){
-               respues=response.split("@");
-            $("#respuestaTabla").html(respues[0]);
-            $("#totalVendido").html("Ventas por periodo, total vendido: " + respues[1]);
-
-           }
-       });
-    }
-
-       function buscarporLapsosDeFecha(){
-          
-        fechaInicio= $("#fechaInicio").val();
-        fechaFin= $("#fechaFin").val();
-
-        if(fechaFin=== "" || fechaInicio===""){
-            alert("Por favor ingresa las fechas solicitadas");
-            return false;
-        }
-        parametros={
-            "fechaInicio":fechaInicio,
-            "fechaFin":fechaFin,
-            "opcion":"ventas_por_lapsos_de_tiempo"
-        };
-        $.ajax({
-            data:parametros,
-            url:"../logicaNegocio.php",
-            type:"post",
-            beforeSend: function() {
-
-            },
-            success: function(response){
-            respues=response.split("@");
-            $("#respuestaTabla").html(respues[0]);
-            $("#totalVendido").html("Ventas por periodo, total vendido: " + respues[1]);
-
-            }
-
-        });
-       
-    }
-    
-    </script>
-    
 </head>
 
 <body id="page-top">
@@ -122,19 +60,21 @@ $sesionIniciada=$utils->revisarSession(1);
             <div class="sidebar-heading">
                 Menu
             </div>
+            <!-- Nav Item - Tables -->
 
             <!-- Nav Item - Pages Collapse Menu -->
-            
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-user"></i>
-                    <span>Empleados</span>
+                    <span>Usuarios</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Operaciones usuarios</h6>
-                       <!-- <a class="collapse-item" href="../empleados/registrar.php">Registro</a>-->
-                        <a class="collapse-item" href="../empleados/consultar.php">Consulta</a>
+                        <a class="collapse-item" href="../usuarios/registrar.php">Registro</a>
+                        <a class="collapse-item" href="../usuarios/consultar.php">Consulta</a>
+                        <a class="collapse-item" href="../usuarios/verpagos.php">Ver falta de pago</a>
+                        <a class="collapse-item" href="../usuarios/veraccesos.php">Ver acceso al GYM</a>
                     </div>
                 </div>
             </li>
@@ -143,51 +83,34 @@ $sesionIniciada=$utils->revisarSession(1);
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-address-book"></i>
-                    <span>Inventario</span>
+                    <span>Entradas/Salidas</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Operaciones inventario:</h6>
-                        <!--<a class="collapse-item" href="../inventario/registro.php">Alta</a>-->
-                        <a class="collapse-item" href="../inventario/consultar.php">Datos</a>
-                        <a class="collapse-item" href="../inventario/bajos.php">Productos bajos</a>
+                        <h6 class="collapse-header">Entradas y salidas:</h6>
+                        <!--<a class="collapse-item" href="inventario/registro.php">Alta</a>-->
+                        <a class="collapse-item" href="../entrada-salida/registrar.php">Registrar entrada/salida</a>
+                        <a class="collapse-item" href="../entrada-salida/consultar.php">Consultar entrada/salida</a>
                     </div>
                 </div>
             </li>
-
-            <!-- Nav Item - Pages Collapse Menu -->
+            <?php if($tipo_usuario!="Empleado"){ ?>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-cash-register"></i>
-                    <span>Productos</span>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities2" aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-address-book"></i>
+                    <span>Ver flujo de efectivo</span>
                 </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div id="collapseUtilities2" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Operaciones de productos:</h6>
-                        <!--<a class="collapse-item" href="../productos/registro.php">Registrar</a>-->
-                        <a class="collapse-item" href="../productos/consultar.php">Consultar</a>
-                        <a class="collapse-item" href="../productos/ventas-periodo.php">Ventas por periodo</a>
-                     
-                        <a class="collapse-item" href="../productos/productos-eliminados.php">Productos eliminados</a>
-                    </div>              </div>
+                        <h6 class="collapse-header">Flujo efectivo</h6>
+                        <!--<a class="collapse-item" href="inventario/registro.php">Alta</a>-->
+                        <a class="collapse-item" href="../corte/corte.php">Realizar corte</a>
+                    </div>
+                </div>
             </li>
+            <?php } ?>
 
 
-  
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="../varios/bitacora.php">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Bitacora</span></a>
-            </li>
-
-              <!-- Nav Item - Charts -->
-              <li class="nav-item">
-                <a class="nav-link" href="../areas/mostrarAreas.php">
-                    <i class="fas fa-fw fa-share-square"></i>
-                    <span>Areas</span></a>
-            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -222,14 +145,14 @@ $sesionIniciada=$utils->revisarSession(1);
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['nombre']; ?></span>
-                                <img class="img-profile rounded-circle" src="../../img/undraw_profile_3.svg">
+                                <img class="img-profile rounded-circle" src="../../img/undraw_profile_2.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Perfil
                                 </a>
-                                
+
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Cerrar sesión
@@ -246,77 +169,65 @@ $sesionIniciada=$utils->revisarSession(1);
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                       <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                      
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Ver accesos al GYM</h1>
                         <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
-                    </div> 
-
-
-
-                    <!-- Content Row -->
-
-
+                    </div>
 
                     <!-- Content Row -->
                     <div class="row">
+
+
+
                         <div class="col-lg-12 mb-4">
 
                             <!-- Illustrations -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <center>
-                                        <h6 id="totalVendido" class="m-0 font-weight-bold text-primary">Ventas por periodo, total vendido: 0</h6>
-                                    </center> 
-                                 </div>
-                                 <div class="card-body">
-                                 <form class="user">
-                                 <div class="form-group row">
-                                 <div class="col-sm-6">
-                                  
-                                    <select id="tipoFecha" class="form-control">
-                                    <option value="0">Mostrar ventas de:</option>
-                                    <option value="Hoy">Hoy</option>
-                                    <option value="Ayer">Ayer</option>
-                                    <option value="Hace una semana">Hace una semana</option>
-                                    <option value="Hace un mes">Hace un mes</option>
-                                    </select>
-                                    </div>
-                                    <div class="col-sm-6">
-                                    
-                                    <a href="#" onclick="buscarPorFecha();" class="btn btn-success btn-icon-split">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-check"></i>
-                                        </span>
-                                        <span class="text">Buscar</span>
-                                    </a>
-                                    </div>
-                                    <div class="col-sm-3 pt-4">
-                                    Fecha inicio:
-                                    <input type="date"  name="fechaInicio" id="fechaInicio" class="form-control">
-                                    </div>
-                                    <div class="col-sm-3 pt-4">
-                                    Fecha Fin:
-                                    <input type="date" name="fechaFin" id="fechaFin" class="form-control">
-                                    </div>
-                                    <div class="col-sm-6 pt-5">
-                                    
-                                    <a href="#" onclick="buscarporLapsosDeFecha();" class="btn btn-warning btn-icon-split">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-check"></i>
-                                        </span>
-                                        <span class="text">Buscar por lapsos</span>
-                                    </a>
-                                    </div>
+                                    <!-- <center>
+                                        <h6 class="m-0 font-weight-bold text-primary">Bienvenid@</h6>
+                                    </center> -->
                                 </div>
-                                </form> 
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Código</th>
+                                                    <th>Nombre</th>
+                                                    <th>Apellidos</th>
+                                                    <th>Fecha</th>
+                                                </tr>
+                                            </thead>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>Código</th>
+                                                    <th>Nombre</th>
+                                                    <th>Apellidos</th>
+                                                    <th>Fecha</th>
+                                                </tr>
+                                            </tfoot>
+                                            <tbody>
+                                                <?php
+                                                $res = $objAcc->consultarTodos();
 
-                                <div id="respuestaTabla"></div>
+                                                $i = 1;
+                                                while ($fila = mysqli_fetch_assoc($res)) {
+                                                    echo "<tr>";
+                                                    echo "<td>" . $fila["codigo"] . "</td>";
+                                                    echo "<td>" . $fila["nombre"] . "</td>";
+                                                    echo "<td>" . $fila["apellidos"] . "</td>";
+                                                    echo "<td>" . $fila["fecha"] . "</td>";
+                                                    echo "</tr>";
+                                                }
+                                                ?>
 
-                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+
                                 </div>
-
-                                
                             </div>
 
 
@@ -334,7 +245,7 @@ $sesionIniciada=$utils->revisarSession(1);
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span> M.S.C. Job  &copy; Sistema Santa Rosa</span>
+                        <span> M.S.C. Job &copy; Athletic Gym</span>
                     </div>
                 </div>
             </footer>
@@ -351,7 +262,7 @@ $sesionIniciada=$utils->revisarSession(1);
         <i class="fas fa-angle-up"></i>
     </a>
 
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -379,11 +290,9 @@ $sesionIniciada=$utils->revisarSession(1);
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
 
-         <!-- Page level plugins -->
-         <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../js/jquery-3.5.1.min.js"></script>
+    <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
     <script src="../../js/demo/datatables-demo.js"></script>
 
 </body>

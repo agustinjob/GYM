@@ -1,8 +1,11 @@
 <?php
 require "../utils/utilidades.php";
+require "../dao/movimientos.php";
+
 
 $utils= new Utilidades();
 $sesionIniciada=$utils->revisarSession(1);
+$tipo_usuario=$_SESSION["tipo"];
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +19,7 @@ $sesionIniciada=$utils->revisarSession(1);
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sistema Santa Rosa</title>
+    <title>Athletic Gym</title>
 
     <!-- Custom fonts for this template-->
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -27,14 +30,7 @@ $sesionIniciada=$utils->revisarSession(1);
 
     <script>
           function revisaDatos() {
-            var pass1 = document.getElementById("pass1").value;
-            var pass2 = document.getElementById("pass2").value;
-            
-            if (pass1 != pass2 ) {
-                alert("Tus contraseñas no son iguales, revisa tus datos ingresados");
-                return false;
-            }
-  
+         
             $.ajax({
                 data: $("#formulario").serialize(),
                 url: '../logicaNegocio.php',
@@ -43,16 +39,14 @@ $sesionIniciada=$utils->revisarSession(1);
                    
                 },
                 success: function(response) {
-                  alert(response);
+             
                     if (response.trim() === "1") {
-                       alert("Datos registrados correctamente");
+                       alert("Operación realizada satisfactoriamente");
                        document.getElementById("formulario").reset();
                     } else {
-                        if(response.trim() === "2"){
-                            alert("No se pudo registrar al empleado, el nombre de usuario ya esta ocupado");
-                        }else{
+                        
                             alert("Ocurrio un error, por favor vuelve a intentarlo");
-                        }
+                        
                     }
                 }
             });
@@ -89,19 +83,21 @@ $sesionIniciada=$utils->revisarSession(1);
 <div class="sidebar-heading">
     Menu
 </div>
+<!-- Nav Item - Tables -->
 
 <!-- Nav Item - Pages Collapse Menu -->
- 
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-fw fa-user"></i>
-        <span>Empleados</span>
+        <span>Usuarios</span>
     </a>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Operaciones usuarios</h6>
-           <!-- <a class="collapse-item" href="../empleados/registrar.php">Registro</a>-->
-            <a class="collapse-item" href="../empleados/consultar.php">Consulta</a>
+            <a class="collapse-item" href="../usuarios/registrar.php">Registro</a>
+            <a class="collapse-item" href="../usuarios/consultar.php">Consulta</a>
+            <a class="collapse-item" href="../usuarios/verpagos.php">Ver falta de pago</a>
+            <a class="collapse-item" href="../usuarios/veraccesos.php">Ver acceso al GYM</a>
         </div>
     </div>
 </li>
@@ -110,52 +106,34 @@ $sesionIniciada=$utils->revisarSession(1);
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
         <i class="fas fa-fw fa-address-book"></i>
-        <span>Inventario</span>
+        <span>Entradas/Salidas</span>
     </a>
     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Operaciones inventario:</h6>
-            <!--<a class="collapse-item" href="../inventario/registro.php">Alta</a>-->
-            <a class="collapse-item" href="../inventario/consultar.php">Datos</a>
-            <a class="collapse-item" href="../inventario/bajos.php">Productos bajos</a>
+            <h6 class="collapse-header">Entradas y salidas:</h6>
+            <!--<a class="collapse-item" href="inventario/registro.php">Alta</a>-->
+            <a class="collapse-item" href="../entrada-salida/registrar.php">Registrar entrada/salida</a>
+            <a class="collapse-item" href="../entrada-salida/consultar.php">Consultar entrada/salida</a>
         </div>
     </div>
 </li>
-
-<!-- Nav Item - Pages Collapse Menu -->
+<?php if($tipo_usuario!="Empleado"){ ?>
 <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-        <i class="fas fa-fw fa-cash-register"></i>
-        <span>Productos</span>
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities2" aria-expanded="true" aria-controls="collapseUtilities">
+        <i class="fas fa-fw fa-address-book"></i>
+        <span>Ver flujo de efectivo</span>
     </a>
-    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+    <div id="collapseUtilities2" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Operaciones de productos:</h6>
-            <!--<a class="collapse-item" href="../productos/registro.php">Registrar</a>-->
-            <a class="collapse-item" href="../productos/consultar.php">Consultar</a>
-            <a class="collapse-item" href="../productos/ventas-periodo.php">Ventas por periodo</a>
-         
-            <a class="collapse-item" href="../productos/productos-eliminados.php">Productos eliminados</a>
-        </div>              </div>
+            <h6 class="collapse-header">Flujo efectivo</h6>
+            <!--<a class="collapse-item" href="inventario/registro.php">Alta</a>-->
+            <a class="collapse-item" href="../corte/corte.php">Realizar corte</a>
+        </div>
+    </div>
 </li>
+<?php } ?>
 
 
-
-
-
-<!-- Nav Item - Tables -->
-<li class="nav-item">
-    <a class="nav-link" href="../varios/bitacora.php">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Bitacora</span></a>
-</li>
-
-  <!-- Nav Item - Charts -->
-  <li class="nav-item">
-                <a class="nav-link" href="../areas/mostrarAreas.php">
-                    <i class="fas fa-fw fa-share-square"></i>
-                    <span>Areas</span></a>
-            </li>
 
 <!-- Divider -->
 <hr class="sidebar-divider d-none d-md-block">
@@ -190,7 +168,7 @@ $sesionIniciada=$utils->revisarSession(1);
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['nombre']; ?></span>
-                                <img class="img-profile rounded-circle" src="../../img/undraw_profile_3.svg">
+                                <img class="img-profile rounded-circle" src="../../img/undraw_profile_2.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -215,7 +193,7 @@ $sesionIniciada=$utils->revisarSession(1);
 
                     <!-- Page Heading -->
                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Registrar datos usuario</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Registrar entradas/salidas</h1>
                         <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
                     </div> 
@@ -238,30 +216,29 @@ $sesionIniciada=$utils->revisarSession(1);
                                 <form id="formulario" action="javascript:revisaDatos()" class="user">
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
-                                        <input type="text" name="nombre" id="nombre" class="form-control form-control-user" id="exampleFirstName"
-                                            placeholder="Nombre(s)" required>
+                                        <input type="number" name="monto" id="monto" class="form-control form-control-user" id="exampleFirstName"
+                                            placeholder="Monto" required>
                                     </div>
             
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="apellidos" id="apellidos" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Nombre de usuario" required>
+                                    <input type="text" name="concepto" id="concepto" class="form-control form-control-user" id="exampleInputEmail"
+                                        placeholder="Concepto" required>
                                 </div>
-                                <div class="form-group">
-                                    <input type="text" name="direccion" id="direccion" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Dirección" required>
-                                </div>
+                                
                                 <div class="form-group row">
+                                    
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" name="pass1" id="pass1" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password" required>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="password" name="pass2" id="pass2" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repite Password" required>
-                                    </div>
+                                    <select class="form-control" name="tipo" id="tipo">
+                                        <option value="0">Selecciona Salida/Entrada</option>
+                                        <option value="Salida">Salida</option>
+                                        <option value="Entrada">Entrada</option>
+                                   
+                                       
+                                    </select>
                                 </div>
-                                <input type="hidden" name="opcion" value="empleado_registrar">
+                                </div>
+                                <input type="hidden" name="opcion" value="movimientos_registrar">
                                 <input type="submit" class="btn btn-primary btn-user btn-block" value="Registrar datos" />
                                
                               
@@ -285,7 +262,7 @@ $sesionIniciada=$utils->revisarSession(1);
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span> M.S.C. Job  &copy; Sistema Santa Rosa</span>
+                        <span> M.S.C. Job  &copy; Athletic Gym</span>
                     </div>
                 </div>
             </footer>
@@ -330,7 +307,7 @@ $sesionIniciada=$utils->revisarSession(1);
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
 
-    <script src="../../js/jquery-3.5.1.min.js"></script>
+   
 
 </body>
 

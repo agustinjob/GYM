@@ -3,6 +3,7 @@ require "utils/utilidades.php";
 
 $utils= new Utilidades();
 $sesionIniciada=$utils->revisarSession(2);
+$tipo_usuario=$_SESSION["tipo"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +15,7 @@ $sesionIniciada=$utils->revisarSession(2);
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sistema Santa Rosa</title>
+    <title>Athletic Gym</title>
 
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -66,8 +67,8 @@ $sesionIniciada=$utils->revisarSession(2);
                         <h6 class="collapse-header">Operaciones usuarios</h6>
                        <a class="collapse-item"  href="usuarios/registrar.php">Registro</a>
                         <a class="collapse-item" href="usuarios/consultar.php">Consulta</a>
-                        <a class="collapse-item" href="usuarios/faltadepago.php">Ver falta de pago</a>
-                        <a class="collapse-item" href="usuarios/accesogym.php">Ver acceso al GYM</a>
+                        <a class="collapse-item" href="usuarios/verpagos.php">Ver falta de pago</a>
+                        <a class="collapse-item" href="usuarios/veraccesos.php">Ver acceso al GYM</a>
                     </div>
                 </div>
             </li>
@@ -87,7 +88,7 @@ $sesionIniciada=$utils->revisarSession(2);
                     </div>
                 </div>
             </li>
-
+<?php if($tipo_usuario!="Empleado"){ ?>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities2" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-address-book"></i>
@@ -97,10 +98,11 @@ $sesionIniciada=$utils->revisarSession(2);
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Flujo efectivo</h6>
                         <!--<a class="collapse-item" href="inventario/registro.php">Alta</a>-->
-                        <a class="collapse-item" href="corte/consultar.php">Realizar corte</a>
+                        <a class="collapse-item" href="corte/corte.php">Realizar corte</a>
                     </div>
                 </div>
             </li>
+            <?php }?>
 
     
 
@@ -205,7 +207,7 @@ $sesionIniciada=$utils->revisarSession(2);
                                     <div class="text-center">
                                         <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="../img/undraw_posting_photo.svg" alt="">
                                     </div>
-                                    <p> Bienvenid@ <?php echo $_SESSION['nombre']; ?>, al sistema de administración <a target="_blank" rel="nofollow" href="#">Bibianas GYM</a>, por favor selecciona algunas de las operaciones del menu de la izquierda para empezar a ocuparlo. </p>
+                                    <p> Bienvenid@ <?php echo $_SESSION['nombre']; ?>, al sistema de administración <a target="_blank" rel="nofollow" href="#">Athletic Gym</a>, por favor selecciona algunas de las operaciones del menu de la izquierda para empezar a ocuparlo. </p>
 
                                 </div>
                             </div>
