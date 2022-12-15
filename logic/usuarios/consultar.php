@@ -35,6 +35,10 @@ $tipo_usuario=$_SESSION["tipo"];
         function revisaDatos() {
             var paquete = document.getElementById("paquete").value;
             var costo = [];
+            if(paquete=="0"){
+                alert("Tienes que seleccionar un paquete por favor");
+                return false;
+            }
         
             tipo=document.getElementById("tipoPaquete").value;
             if (tipo == "normal") {
@@ -45,6 +49,18 @@ $tipo_usuario=$_SESSION["tipo"];
                 costo[1] = document.getElementById("frecuenciaPaquete").value;
                 const option = document.createElement('option');
                 const valor = document.getElementById("nombrePaquete").value;
+                if(valor==""){
+                    alert("Por favor ingresa el nombre del paquete");
+                    return false;
+                }
+                if(costo[0]=="" || costo[0] == 0){
+                    alert("Por favor ingresa el costo del paquete");
+                    return false;
+                }
+                if(costo[1] == "0"){
+                    alert("Por favor  ingresa la frecuencia del pago del paquete");
+                    return false;
+                }
                 option.value = valor;
                 option.text = valor;
                 document.getElementById("paquete").appendChild(option);
@@ -178,8 +194,10 @@ $tipo_usuario=$_SESSION["tipo"];
         }
 
         function mostrarInfoExtra() {
+            
             var paquete = document.getElementById("paquete").value;
-            if (paquete == "Otro") {
+            console.log(paquete);
+            if (paquete == "OTRO") {
                 document.getElementById("tipoPaquete").value = "personalizado";
                 document.getElementById("infoextra").style = "display:block;";
             } else {
@@ -391,6 +409,7 @@ $tipo_usuario=$_SESSION["tipo"];
                                                     <th>Celular</th>
                                                     <th>Email</th>
                                                     <th>Paquete</th>
+                                                    <th>Monto</th>
                                                     <th>Fecha nacimiento</th>
                                                     <th>Fecha registro</th>
                                                     <th>Opción</th>
@@ -404,6 +423,7 @@ $tipo_usuario=$_SESSION["tipo"];
                                                     <th>Celular</th>
                                                     <th>Email</th>
                                                     <th>Paquete</th>
+                                                    <th>Monto</th>
                                                     <th>Fecha nacimiento</th>
                                                     <th>Fecha registro</th>
                                                     <th>Opción</th>
@@ -417,7 +437,9 @@ $tipo_usuario=$_SESSION["tipo"];
                                                 while ($fila = mysqli_fetch_assoc($res)) {
                                                     $cod = $fila["codigo"];
                                                     $tipo = $fila["tipo_paquete"];
-                                                    $costo = $fila["costo_paquete"];
+                                                    $costo = "$".$fila["costo_paquete"];
+                                                
+                                                  
                                                     $frecuencia = $fila["frecuencia"];
                                                     echo "<tr>";
                                                     echo "<td><span id='" . $cod . "cod'>" . $fila["codigo"] . "</span></td>";
@@ -426,6 +448,7 @@ $tipo_usuario=$_SESSION["tipo"];
                                                     echo "<td><span id='" . $cod . "cel'>" . $fila["celular"] . "</span></td>";
                                                     echo "<td><span id='" . $cod . "ema'>" . $fila["email"] . "</span></td>";
                                                     echo "<td><span id='" . $cod . "paq'>" . $fila["paquete"] . "</span></td>";
+                                                    echo "<td><span id='" . $cod . "costo'>" . $costo . "</span></td>";
                                                     echo "<td><span id='" . $cod . "fna'>" . $fila["fecha_nacimiento"] . "</span></td>";
                                                     echo "<td>" . $fila["fecha_registro"] . "</td>";
                                                     echo "<td><a  onclick='llenarFormModificar(\"" . $cod . "\",\"" . $tipo . "\",\"" . $costo . "\",\"" . $frecuencia . "\");' href='#' data-toggle='modal' data-target='#modal'  class='btn btn-success btn-sm'>Modificar</a>
@@ -472,7 +495,7 @@ $tipo_usuario=$_SESSION["tipo"];
                                         <input type="number" name="montoPaquete" id="montoPaquete" class="form-control form-control-user" placeholder="costo del paquete" value="">
                                     </div>
                                     <div class="col-sm-6 mb-3 mb-sm-0 mt-2">
-                                    <select class="form-control" name="frecuenciaPaquete" id="frecuenciaPaquete">
+                                    <select class="form-control" name="frecuenciaPaquete"  id="frecuenciaPaquete">
                                                     <option value="0">Selecciona cada cuanto se va a cobrar</option>
                                                     <option value="Día">Día</option>
                                                     <option value="Semana">Semana</option>
@@ -506,7 +529,7 @@ $tipo_usuario=$_SESSION["tipo"];
                                         <input type="text" name="celular" id="celular" class="form-control form-control-user" placeholder="Celular" required>
                                     </div>
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <select class="form-control" onchange="mostrarInfoExtra();" name="paquete" id="paquete">
+                                        <select class="form-control" onchange="mostrarInfoExtra()" name="paquete" id="paquete">
                                             <option value="0">Selecciona un paquete</option>
                                             <option value="DIA GYM/BOX">Día gym/box </option>
                                             <option value="SEMANA GYM/BOX">Semana gym/box </option>

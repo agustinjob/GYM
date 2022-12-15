@@ -1,6 +1,7 @@
 <?php
 require "logic/dao/usuario.php";
 $codigo = $_GET["codigo"];
+$pago=$_GET["pago"];
 $objUsu = new Usuario();
 ?>
 <!DOCTYPE html>
@@ -43,7 +44,7 @@ $objUsu = new Usuario();
 
             <div class="col-xl-10 col-lg-12 col-md-9">
 
-                <div class="card o-hidden border-0 shadow-lg my-5" style="background-color: greenyellow;">
+                <div class="card o-hidden border-0 shadow-lg my-5" <?php if($pago=="Correcto") {echo 'style="background-color: greenyellow;"';} else{ echo 'style="background-color: red;"';} ?>>
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
@@ -55,7 +56,7 @@ $objUsu = new Usuario();
                                         $usuario = $objUsu->buscarByCodigo($codigo);
                                         $info = mysqli_fetch_assoc($usuario);
                                         ?>
-                                        <h1 class="h4 text-white-900 mb-4">Bienvenid@ <?php echo $info["nombre"]; ?></h1>
+                                        <h1 class="h4 mb-4" style="color:white;">Bienvenid@ <?php echo $info["nombre"]; ?></h1>
                                         <br>
                                         <?php $partida1 = explode("-", $info["fecha_nacimiento"]);
                                         $date_nueva = date('Y-m-d');
@@ -63,7 +64,8 @@ $objUsu = new Usuario();
                                         if ($partida1[1] == $partida2[1] && $partida1[2] == $partida2[2]) {
                                             echo ' <h1 class="h4 text-white-900 mb-4">QUE TENGAS UN MUY FELIZ CUMPLEAÑOS</h1>  ';
                                         }  ?>
-                                        <h1 class="h4 text-white-900 mb-4">PUEDES INGRESAR AL GYM</h1>
+                                        <?php if($pago=="Correcto") {echo '<h1 class="h4 mb-4" style="color:white;>PUEDES INGRESAR AL GYM</h1>';} else{ echo '<h1 class="h4  mb-4" style="color:white;">POR FAVOR REALIZA TU PAGO. ¡¡ESTAS ATRASADO!!</h1>';} ?>
+                                        
                                         <!--  <img src="img/logoGym.jpg"/><br/>-->
                                     </div>
 

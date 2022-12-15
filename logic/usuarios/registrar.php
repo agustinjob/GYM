@@ -52,6 +52,10 @@ $tipo_usuario=$_SESSION["tipo"];
                     alert("Por favor ingresa el costo del paquete");
                     return false;
                 }
+                if(costo[1] == "0"){
+                    alert("Por favor ingresa la frecuencia del pago del paquete");
+                    return false;
+                }
                 option.value = valor;
                 option.text = valor;
                 document.getElementById("paquete").appendChild(option);

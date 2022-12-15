@@ -61,14 +61,12 @@
 
                 },
                 success: function(response) {
-                
-                    if (response === "vacio") {
+                    console.log(response);
+                     if (response === "Datos no encontrados") {
                         alert("Datos no encontrados");
                     } else {
-                    
-                       location.href = "resul-acceso.php?codigo="+response.trim();
-
-                    }
+                       location.href = "resul-acceso.php?codigo="+codi+"&pago="+response.trim();
+                    } 
                 }
             });
         }
@@ -87,6 +85,10 @@
             document.getElementById("codigo").value = "";
 
         }
+
+      
+
+        
     </script>
 
     <!-- Custom fonts for this template-->

@@ -24,9 +24,9 @@ class Usuario
 
         $result = mysqli_query($conectar, $sql);
         if ($result > 0) {
-            $objMov = new Movimientos();
+         /*   $objMov = new Movimientos();
             $b = ["Pago de paquete: " . $a[4] . " del cliente con código: " . $a[5], $a[7], "Pago servicio"];
-            $objMov->registrar($b);
+            $objMov->registrar($b);*/
             $objPago = new Pago();
             $objPago->registrar($a[7], $a[4], $a[5],Date("Y-m-d"));
         }
@@ -67,7 +67,7 @@ class Usuario
         //“”
     }
     function devolverFechaPago($fecha,$tipo){
-
+        $fechaPago="";
         switch ($tipo) {
             case 'Día':$fechaPago=date("Y-m-d",strtotime($fecha."+ 1 days")); break;
             case 'Semana':$fechaPago=date("Y-m-d",strtotime($fecha."+ 7 days")); break;
@@ -81,8 +81,31 @@ class Usuario
          
     }
 
+    function buscarParaRedireccionar($codigo,$fechaActual){
+        $informacion="";
+        $c = new Conectar();
+        $conectar = $c->conexion();
+        $sql = "SELECT codigo,nombre,paquete,frecuencia,max(fecha) as fecha from (SELECT u.codigo,u.nombre,u.frecuencia, p.paquete,p.monto,p.fecha FROM `pago` p, usuario u".
+        " where  p.codigo = u.codigo and u.estatus='vigente') tab where tab.codigo='$codigo';";
+        $result = mysqli_query($conectar, $sql);
+         $fila = mysqli_fetch_assoc($result);
+        if($fila["codigo"]==""){
+            $informacion="Datos no encontrados";
+        }else{
+           $fechaPago=$this->devolverFechaPago($fila["fecha"],$fila["frecuencia"]);
+           if($fechaPago>=$fechaActual){
+            $informacion="Correcto";
+           }else{
+            $informacion="Atrasado";
+           }
+        }
+        return $informacion;
+    }
+
     function buscarByCodigo($codigo)
     {
+        // Logica
+        // aquí hacer logica para saber si ya pago
         $c = new Conectar();
         $conectar = $c->conexion();
         $sql = "select * from usuario where estatus='vigente' and codigo='$codigo'";

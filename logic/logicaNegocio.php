@@ -66,18 +66,9 @@ if ($opcion == "movimientos_registrar") {
 }
 
 if ($opcion == "acceso") {
-  $codigo = $_POST["codigo"];
-  $res =  $objUsu->buscarByCodigo($codigo);
-
-  $size = mysqli_num_rows($res);
-  if ($size <= 0) {
-    echo "vacio";
-  } else {
-
-    $fila = mysqli_fetch_assoc($res);
-    $objAcc->registrar($fila["codigo"],$fecha);
-    echo $fila["codigo"];
-  }
+    $codigo = $_POST["codigo"];
+    $res =  $objUsu->buscarParaRedireccionar($codigo,$fecha);
+    echo $res;
 }
 
 if ($opcion == "pago_registrar") {
