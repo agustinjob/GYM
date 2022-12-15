@@ -62,9 +62,9 @@ $objUsu = new Usuario();
                                         $date_nueva = date('Y-m-d');
                                         $partida2 = explode("-", $date_nueva);
                                         if ($partida1[1] == $partida2[1] && $partida1[2] == $partida2[2]) {
-                                            echo ' <h1 class="h4 text-white-900 mb-4">QUE TENGAS UN MUY FELIZ CUMPLEAÑOS</h1>  ';
+                                            echo ' <h1 class="h4 mb-4" style="color:white;>QUE TENGAS UN MUY FELIZ CUMPLEAÑOS</h1>  ';
                                         }  ?>
-                                        <?php if($pago=="Correcto") {echo '<h1 class="h4 mb-4" style="color:white;>PUEDES INGRESAR AL GYM</h1>';} else{ echo '<h1 class="h4  mb-4" style="color:white;">POR FAVOR REALIZA TU PAGO. ¡¡ESTAS ATRASADO!!</h1>';} ?>
+                                        <?php if($pago=="Correcto") {echo '<h1 class="h4 mb-4" style="color:white;">PUEDES INGRESAR AL GYM</h1>';} else{ echo '<h1 class="h4  mb-4" style="color:white;">POR FAVOR REALIZA TU PAGO. ¡¡ESTAS ATRASADO!!</h1>';} ?>
                                         
                                         <!--  <img src="img/logoGym.jpg"/><br/>-->
                                     </div>
