@@ -227,7 +227,7 @@ $tipo_usuario=$_SESSION["tipo"];
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span> M.S.C. Job  &copy; Sistema Bibinas Gyms</span>
+                        <span> M.S.C. Job  &copy; Sistema Sparta Gym</span>
                     </div>
                 </div>
             </footer>
