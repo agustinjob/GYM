@@ -24,7 +24,7 @@ $intervalo = $_GET["intervalo"];
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Athletic Gym</title>
+    <title>Sparta Gym</title>
 
     <!-- Custom fonts for this template-->
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -352,7 +352,7 @@ $intervalo = $_GET["intervalo"];
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span> M.S.C. Job &copy; Athletic Gym</span>
+                        <span> M.S.C. Job &copy; Sparta Gym</span>
                     </div>
                 </div>
             </footer>

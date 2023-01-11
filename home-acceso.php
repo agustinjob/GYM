@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
 
-    <title>SR</title>
+    <title>Sparta Gym</title>
     <!-- Bootstrap core JavaScript-->
     <script src="js/jquery-3.6.0.min.js"></script>
     <script>
@@ -150,7 +150,7 @@
                                     </center>
 
                                     <div class="text-center">
-                                        <a class="small" href="#">Athletic Gym</a>
+                                        <a class="small" href="#">Sparta Gym</a>
                                     </div>
 
                                 </div>

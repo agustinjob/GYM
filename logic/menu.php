@@ -15,7 +15,7 @@ $tipo_usuario=$_SESSION["tipo"];
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Athletic Gym</title>
+    <title>Sparta Gym</title>
 
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -207,7 +207,7 @@ $tipo_usuario=$_SESSION["tipo"];
                                     <div class="text-center">
                                         <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="../img/undraw_posting_photo.svg" alt="">
                                     </div>
-                                    <p> Bienvenid@ <?php echo $_SESSION['nombre']; ?>, al sistema de administración <a target="_blank" rel="nofollow" href="#">Athletic Gym</a>, por favor selecciona algunas de las operaciones del menu de la izquierda para empezar a ocuparlo. </p>
+                                    <p> Bienvenid@ <?php echo $_SESSION['nombre']; ?>, al sistema de administración <a target="_blank" rel="nofollow" href="#">Sparta Gym</a>, por favor selecciona algunas de las operaciones del menu de la izquierda para empezar a ocuparlo. </p>
 
                                 </div>
                             </div>
