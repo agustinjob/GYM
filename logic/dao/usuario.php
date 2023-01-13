@@ -78,7 +78,7 @@ class Usuario
             case 'semestre':$fechaPago=date("Y-m-d",strtotime($fecha."+ 6 month")); break;
             case 'anualidad':$fechaPago=date("Y-m-d",strtotime($fecha."+ 1 year")); break;
         }
-        echo "FECHA ".$fechaPago;
+      
         return $fechaPago;
          
     }
