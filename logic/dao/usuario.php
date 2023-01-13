@@ -68,6 +68,7 @@ class Usuario
     }
     function devolverFechaPago($fecha,$tipo){
         $fechaPago="";
+        $tipo=strtolower($tipo);
         switch ($tipo) {
             case 'Día':$fechaPago=date("Y-m-d",strtotime($fecha."+ 1 days")); break;
             case 'Semana':$fechaPago=date("Y-m-d",strtotime($fecha."+ 7 days")); break;
