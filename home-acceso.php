@@ -48,6 +48,7 @@
         function redirecciona() {
 
             var codi = document.getElementById("codigo").value;
+            
             var parametros = {
                 "codigo": codi,
                 "opcion": "acceso"
@@ -58,14 +59,13 @@
                 url: 'logic/logicaNegocio.php',
                 type: 'post',
                 beforeSend: function() {
-
                 },
                 success: function(response) {
                     console.log(response);
                      if (response === "Datos no encontrados") {
                         alert("Datos no encontrados");
                     } else {
-                       location.href = "resul-acceso.php?codigo="+codi+"&pago="+response.trim();
+                   //    location.href = "resul-acceso.php?codigo="+codi+"&pago="+response.trim();
                     } 
                 }
             });

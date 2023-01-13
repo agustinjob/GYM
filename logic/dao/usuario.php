@@ -68,15 +68,17 @@ class Usuario
     }
     function devolverFechaPago($fecha,$tipo){
         $fechaPago="";
+        $tipo=strtolower($tipo);
         switch ($tipo) {
-            case 'Día':$fechaPago=date("Y-m-d",strtotime($fecha."+ 1 days")); break;
-            case 'Semana':$fechaPago=date("Y-m-d",strtotime($fecha."+ 7 days")); break;
-            case 'Quincena':$fechaPago=date("Y-m-d",strtotime($fecha."+ 15 days")); break;
-            case 'Mensualidad':$fechaPago=date("Y-m-d",strtotime($fecha."+ 1 month")); break;
-            case 'Trimestre':$fechaPago=date("Y-m-d",strtotime($fecha."+ 3 month")); break;
-            case 'Semestre':$fechaPago=date("Y-m-d",strtotime($fecha."+ 6 month")); break;
-            case 'Anualidad':$fechaPago=date("Y-m-d",strtotime($fecha."+ 1 year")); break;
+            case 'día':$fechaPago=date("Y-m-d",strtotime($fecha."+ 1 days")); break;
+            case 'semana':$fechaPago=date("Y-m-d",strtotime($fecha."+ 7 days")); break;
+            case 'quincena':$fechaPago=date("Y-m-d",strtotime($fecha."+ 15 days")); break;
+            case 'mensualidad':$fechaPago=date("Y-m-d",strtotime($fecha."+ 1 month")); break;
+            case 'trimestre':$fechaPago=date("Y-m-d",strtotime($fecha."+ 3 month")); break;
+            case 'semestre':$fechaPago=date("Y-m-d",strtotime($fecha."+ 6 month")); break;
+            case 'anualidad':$fechaPago=date("Y-m-d",strtotime($fecha."+ 1 year")); break;
         }
+        echo "FECHA ".$fechaPago;
         return $fechaPago;
          
     }
