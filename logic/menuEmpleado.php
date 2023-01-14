@@ -66,7 +66,7 @@ $sesionIniciada=$utils->revisarSession(2);
                         <h6 class="collapse-header">Operaciones usuarios</h6>
                        <a class="collapse-item" href="empleados/registrar.php">Registro</a>
                         <a class="collapse-item" href="empleados/consultar.php">Consulta</a>
-                        <a class="collapse-item" href="empleados/consultar.php">Ver falta de pago</a>
+                        <a class="collapse-item" href="empleados/consultar.php">Ver fecha pago</a>
                     </div>
                 </div>
             </li>

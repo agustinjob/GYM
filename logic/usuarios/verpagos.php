@@ -139,7 +139,7 @@ $intervalo = $_GET["intervalo"];
                         <h6 class="collapse-header">Operaciones usuarios</h6>
                         <a class="collapse-item" href="../usuarios/registrar.php">Registro</a>
                         <a class="collapse-item" href="../usuarios/consultar.php">Consulta</a>
-                        <a class="collapse-item" href="../usuarios/verpagos.php">Ver falta de pago</a>
+                        <a class="collapse-item" href="../usuarios/verpagos.php">Ver fecha pago</a>
                         <a class="collapse-item" href="../usuarios/veraccesos.php">Ver acceso al GYM</a>
                     </div>
                 </div>
