@@ -1,6 +1,7 @@
 <?php
 
 require_once "conexion.php";
+require_once "acceso.php";
 
 
 class Usuario
@@ -93,6 +94,8 @@ class Usuario
         if($fila["codigo"]==""){
             $informacion="Datos no encontrados";
         }else{
+            $acceso=new Acceso();
+            $acceso->registrar($codigo,$fechaActual);
            $fechaPago=$this->devolverFechaPago($fila["fecha"],$fila["frecuencia"]);
            if($fechaPago>=$fechaActual){
             $informacion="Correcto";
