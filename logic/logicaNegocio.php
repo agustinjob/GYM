@@ -27,8 +27,9 @@ if ($opcion == "usuario_registrar") {
   $costo = $_POST['costo'];
   $frecuencia = $_POST['frecuencia'];
   $tipoPaque = $_POST['tipoPaquete'];
+  $inscripcion= $_POST['inscripcion'];
   //  `nombre`, `apellidos`, `email`, `celular`, `paquete`, `codigo`, `fecha_nacimiento`, `fecha_registro`, `costo_paquete`,estatus
-  $arr = [$nombre, $apellidos, $email, $celular, $paquete, $objUsu->generaCodigo(), $fnacimiento, $costo, $frecuencia, $tipoPaque];
+  $arr = [$nombre, $apellidos, $email, $celular, $paquete, $objUsu->generaCodigo(), $fnacimiento, $costo, $frecuencia, $tipoPaque,$inscripcion];
   $res = $objUsu->registrarUsuario($arr);
   echo $res;
 }

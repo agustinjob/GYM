@@ -27,6 +27,8 @@ $tipo_usuario=$_SESSION["tipo"];
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
 
     <script>
+      
+
         function revisaDatos() {
             var paquete = document.getElementById("paquete").value;
             var costo = [];
@@ -374,12 +376,18 @@ $tipo_usuario=$_SESSION["tipo"];
                                             </div>
 
                                         </div>
+                                        <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0 mt-3">
+                                                <strong> Fecha de registro:</strong>
+                                                <input type="date" name="inscripcion" id="inscripcion" class="form-control form-control-user">
+                                            </div>
+                                        </div>
                                         <input type="hidden" name="costo" id="costo" value="0">
                                         <input type="hidden" name="frecuencia" id="frecuencia" value="0">
                                         <input type="hidden" name="tipoPaquete" id="tipoPaquete" value="normal">
                                         <input type="hidden" name="opcion" value="usuario_registrar">
                                         <input type="submit" class="btn btn-primary btn-user btn-block" value="Registrar datos" />
-
+                                     
 
                                     </form>
 

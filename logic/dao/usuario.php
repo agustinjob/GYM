@@ -17,10 +17,13 @@ class Usuario
 
     function registrarUsuario($a)
     {
+        if($a[10]==""){
+            $a[10]=Date("Y-m-d H:i:s");
+        }
         $c = new Conectar();
         $conectar = $c->conexion();
         $sql = "INSERT INTO `usuario`( `nombre`, `apellidos`, `email`, `celular`, `paquete`, `codigo`, `fecha_nacimiento`, `fecha_registro`, `costo_paquete`,estatus,frecuencia,tipo_paquete)"
-            . "VaLUES ('" . $a[0] . "','" . $a[1] . "','" . $a[2] . "','" . $a[3] . "','" . $a[4] . "', '" . $a[5] . "' ,'" . $a[6] . "', '" . Date("Y-m-d H:i:s") . "' ,'" . $a[7] . "','vigente','" . $a[8] . "','" . $a[9] . "')";
+            . "VaLUES ('" . $a[0] . "','" . $a[1] . "','" . $a[2] . "','" . $a[3] . "','" . $a[4] . "', '" . $a[5] . "' ,'" . $a[6] . "', '" . $a[10] . "' ,'" . $a[7] . "','vigente','" . $a[8] . "','" . $a[9] . "')";
 
         $result = mysqli_query($conectar, $sql);
         if ($result > 0) {
