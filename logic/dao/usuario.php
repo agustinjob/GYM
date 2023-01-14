@@ -1,7 +1,6 @@
 <?php
 
 require_once "conexion.php";
-require_once "acceso.php";
 
 
 class Usuario
