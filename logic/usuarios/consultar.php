@@ -121,69 +121,53 @@ $tipo_usuario=$_SESSION["tipo"];
 
         function obtenerCosto(tipo) {
             var costo = [];
-            if (tipo == "DIA GYM/BOX") {
-                costo[0] = 50;
-                costo[1] = "DIA";
+            if (tipo == "DIA GYM") {
+                costo[0] = 45;
+                costo[1] = "Día";
             }
-            if (tipo == "SEMANA GYM/BOX") {
-                costo[0] = 200;
-                costo[1] = "SEMANA";
+            if (tipo == "SEMANA GYM") {
+                costo[0] = 125;
+                costo[1] = "Semana";
             }
-            if (tipo == "QUINCENA GYM/BOX") {
-                costo[0] = 300;
-                costo[1] = "QUINCENA";
+            if (tipo == "QUINCENA GYM") {
+                costo[0] = 175;
+                costo[1] = "Quincena";
             }
             if (tipo == "MENSUALIDAD GYM") {
-                costo[0] = 450;
-                costo[1] = "MENSUALIDAD";
-            }
-            if (tipo == "MENSUALIDAD BOX") {
-                costo[0] = 400;
-                costo[1] = "MENSUALIDAD";
-            }
-            if (tipo == "MENSUALIDAD GYM+BOX") {
-                costo[0] = 700;
-                costo[1] = "MENSUALIDAD";
-            }
-            if (tipo == "MENSUALIDAD GYM (PAREJA)") {
-                costo[0] = 800;
-                costo[1] = "MENSUALIDAD";
-            }
-            if (tipo == "MENSUALIDAD BOX (PAREJA)") {
-                costo[0] = 700;
-                costo[1] = "MENSUALIDAD";
-            }
-            if (tipo == "TRIMESTRE GYM") {
-                costo[0] = 1100;
-                costo[1] = "TRIMESTRE";
-            }
-            if (tipo == "TRIMESTRE BOX") {
-                costo[0] = 1000;
-                costo[1] = "TRIMESTRE";
-            }
-            if (tipo == "TRIMESTRE GYM+BOX") {
-                costo[0] = 2100;
-                costo[1] = "TRIMESTRE";
+                costo[0] = 350;
+                costo[1] = "Mensualidad";
             }
             if (tipo == "SEMESTRE GYM") {
-                costo[0] = 2350;
-                costo[1] = "SEMESTRE";
-            }
-            if (tipo == "SEMESTRE BOX") {
-                costo[0] = 2000;
-                costo[1] = "SEMESTRE";
-            }
-            if (tipo == "SEMESTRE GYM+BOX") {
-                costo[0] = 4350;
-                costo[1] = "SEMESTRE";
+                costo[0] = 1499;
+                costo[1] = "Semestre";
             }
             if (tipo == "ANUALIDAD GYM") {
-                costo[0] = 4500;
-                costo[1] = "ANUALIDAD";
+                costo[0] = 2999;
+                costo[1] = "Anualidad";
+            }
+            if (tipo == "DIA BOX") {
+                costo[0] = 45;
+                costo[1] = "Día";
+            }
+            if (tipo == "SEMANA BOX") {
+                costo[0] = 120;
+                costo[1] = "Semana";
+            }
+            if (tipo == "QUINCENA BOX") {
+                costo[0] = 170;
+                costo[1] = "Quincena";
+            }
+            if (tipo == "MENSUALIDAD BOX") {
+                costo[0] = 320;
+                costo[1] = "Mensualidad";
+            }
+            if (tipo == "SEMESTRE BOX") {
+                costo[0] = 1399;
+                costo[1] = "Semestre";
             }
             if (tipo == "ANUALIDAD BOX") {
-                costo[0] = 4000;
-                costo[1] = "ANUALIDAD";
+                costo[0] = 2499;
+                costo[1] = "Anualidad";
             }
             return costo;
         }
@@ -253,7 +237,7 @@ $tipo_usuario=$_SESSION["tipo"];
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SR Administración</div>
+                <div class="sidebar-brand-text mx-3">SG Administración</div>
             </a>
 
             <!-- Divider -->

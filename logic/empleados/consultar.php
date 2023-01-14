@@ -107,7 +107,7 @@ $empleado= new Empleado();
     <div class="sidebar-brand-icon rotate-n-15">
         <i class="fas fa-laugh-wink"></i>
     </div>
-    <div class="sidebar-brand-text mx-3">SR Administración</div>
+    <div class="sidebar-brand-text mx-3">SG Administración</div>
 </a>
 
 <!-- Divider -->
