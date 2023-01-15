@@ -31,7 +31,7 @@ class Usuario
             $b = ["Pago de paquete: " . $a[4] . " del cliente con código: " . $a[5], $a[7], "Pago servicio"];
             $objMov->registrar($b);*/
             $objPago = new Pago();
-            $objPago->registrar($a[7], $a[4], $a[5],Date("Y-m-d"));
+            $objPago->registrar($a[7], $a[4], $a[5],$a[10]);
         }
         return $result;
     }
@@ -53,6 +53,8 @@ class Usuario
         $conectar = $c->conexion();
         $sql = "UPDATE `usuario` SET `estatus`='eliminado' WHERE codigo=" . $codigo;
         $result = mysqli_query($conectar, $sql);
+        $sql2 = "DELETE FROM pago WHERE codigo=" . $codigo;
+        $result2 = mysqli_query($conectar, $sql2);
         return $result;
     }
 

@@ -3,17 +3,16 @@
 class Conectar {
 
     
-    private $servidor = "sql349.main-hosting.eu";
-   //private $servidor = "localhost";
+    /* private $servidor = "sql349.main-hosting.eu";
     private $usuario = "u585135986_spartagym";
     private $bd = "u585135986_spartagym";
-    private $pass = "Spartagym1";
+    private $pass = "Spartagym1"; */
 
-  /*   
+    
     private $servidor = "localhost";
     private $usuario = "root";
     private $bd = "gym";
-    private $pass = ""; */
+    private $pass = "";
 
 
     public function conexion() {
