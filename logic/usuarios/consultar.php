@@ -193,13 +193,14 @@ $tipo_usuario=$_SESSION["tipo"];
 
         }
 
-        function llenarFormModificar(cod, tipo,costo,frecuencia) {
+        function llenarFormModificar(cod, tipo,costo,frecuencia,inscripcion) {
             nom = $("#" + cod + "nom").text();
             ape = $("#" + cod + "ape").text();
             cel = $("#" + cod + "cel").text();
             ema = $("#" + cod + "ema").text();
             paq = $("#" + cod + "paq").text();
             fna = $("#" + cod + "fna").text();
+    
             if (tipo == "normal") {
                 document.getElementById("infoextra").style="display:none;";
                 document.getElementById("paquete").value = paq;
@@ -207,17 +208,17 @@ $tipo_usuario=$_SESSION["tipo"];
             else{
                 document.getElementById("infoextra").style="display:block;";
                 document.getElementById("nombrePaquete").value = paq;
-                document.getElementById("montoPaquete").value = costo;
+                document.getElementById("montoPaquete").value = costo.slice(1);
                 document.getElementById("frecuenciaPaquete").value = frecuencia;   
-
             }
+            
+            document.getElementById("inscripcion").value = inscripcion.slice(0,-9).trim();
             document.getElementById("tipoPaquete").value = tipo;
             document.getElementById("nombre").value = nom;
             document.getElementById("apellidos").value = ape;
             document.getElementById("email").value = ema;
             document.getElementById("celular").value = cel;
             document.getElementById("nacimiento").value = fna;
-
             document.getElementById("codigo").value = cod;
         }
     </script>
@@ -422,9 +423,8 @@ $tipo_usuario=$_SESSION["tipo"];
                                                     $cod = $fila["codigo"];
                                                     $tipo = $fila["tipo_paquete"];
                                                     $costo = "$".$fila["costo_paquete"];
-                                                
-                                                  
                                                     $frecuencia = $fila["frecuencia"];
+                                                    $inscripcion=$fila["fecha_registro"];
                                                     echo "<tr>";
                                                     echo "<td><span id='" . $cod . "cod'>" . $fila["codigo"] . "</span></td>";
                                                     echo "<td><span id='" . $cod . "nom'>" . $fila["nombre"] . "</span></td>";
@@ -435,7 +435,7 @@ $tipo_usuario=$_SESSION["tipo"];
                                                     echo "<td><span id='" . $cod . "costo'>" . $costo . "</span></td>";
                                                     echo "<td><span id='" . $cod . "fna'>" . $fila["fecha_nacimiento"] . "</span></td>";
                                                     echo "<td>" . $fila["fecha_registro"] . "</td>";
-                                                    echo "<td><a  onclick='llenarFormModificar(\"" . $cod . "\",\"" . $tipo . "\",\"" . $costo . "\",\"" . $frecuencia . "\");' href='#' data-toggle='modal' data-target='#modal'  class='btn btn-success btn-sm'>Modificar</a>
+                                                    echo "<td><a  onclick='llenarFormModificar(\"" . $cod . "\",\"" . $tipo . "\",\"" . $costo . "\",\"" . $frecuencia . "\",\"" . $inscripcion . "\");' href='#' data-toggle='modal' data-target='#modal'  class='btn btn-success btn-sm'>Modificar</a>
                                             <a href='#' onclick='eliminar(\"" . $cod . "\");' class='btn btn-danger btn-sm'>Eliminar</a>";
                                                     echo "</tr>";
                                                 }
@@ -510,7 +510,7 @@ $tipo_usuario=$_SESSION["tipo"];
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" name="celular" id="celular" class="form-control form-control-user" placeholder="Celular" required>
+                                        <input type="text" name="celular" id="celular" class="form-control form-control-user" placeholder="Celular">
                                     </div>
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <select class="form-control" onchange="mostrarInfoExtra()" name="paquete" id="paquete">
@@ -533,6 +533,12 @@ $tipo_usuario=$_SESSION["tipo"];
                                     </div>
 
                                 </div>
+                                <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0 mt-3">
+                                                <strong> Fecha de registro:</strong>
+                                                <input type="date" name="inscripcion" id="inscripcion" class="form-control form-control-user">
+                                            </div>
+                                        </div>
                                 <input type="hidden" name="costo" id="costo" value="0">
                                 <input type="hidden" name="tipoPaquete" id="tipoPaquete" value="0">
                                 <input type="hidden" name="frecuencia" id="frecuencia" value="0">

@@ -21,4 +21,16 @@ class Pago{
     }
 
     
+    function modificarFecha($codigo,$fecha_registro){
+        $c = new Conectar();
+        $conectar=$c->conexion();
+        $query="select min(fecha) as fecha from pago where codigo='$codigo'";
+        $resultado=mysqli_query($conectar,$query);
+        $fila = mysqli_fetch_assoc($resultado);
+        $fecha=$fila['fecha'];
+        $sql="UPDATE pago SET fecha ='$fecha_registro' where codigo='$codigo' and fecha='$fecha'";
+        mysqli_query($conectar,$sql);
+    }
+
+    
 }

@@ -42,8 +42,10 @@ class Usuario
         $conectar = $c->conexion();
         $sql = "UPDATE `usuario` SET `nombre`='$a[0]',`apellidos`='$a[1]'," .
             "`email`='$a[2]',`celular`='$a[3]',`paquete`='$a[4]',`fecha_nacimiento`='$a[5]'," .
-            "`costo_paquete`='$a[6]', frecuencia='$a[7]',tipo_paquete='$a[8]' WHERE codigo='" . $codigo . "'";
+            "`costo_paquete`='$a[6]', frecuencia='$a[7]',tipo_paquete='$a[8]', fecha_registro='$a[9]' WHERE codigo='" . $codigo . "'";
         $result = mysqli_query($conectar, $sql);
+        $pago = new Pago();
+        $pago->modificarFecha($codigo,$a[9]);
         return $result;
     }
 

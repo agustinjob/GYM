@@ -44,10 +44,11 @@ if ($opcion == "usuario_modificar") {
   $codigo = $_POST['codigo'];
   $frecuencia = $_POST['frecuencia'];
   $tipoPaque = $_POST['tipoPaquete'];
+  $inscripcion=$_POST['inscripcion'];
 
-  $arr = [$nombre, $apellidos, $email, $celular, $paquete, $fnacimiento, $costo, $frecuencia, $tipoPaque];
+   $arr = [$nombre, $apellidos, $email, $celular, $paquete, $fnacimiento, $costo, $frecuencia, $tipoPaque,$inscripcion];
   $res = $objUsu->modificarUsuario($arr, $codigo);
-  echo $res;
+  echo $res; 
 }
 
 if ($opcion == "usuario_eliminar") {
